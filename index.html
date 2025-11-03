@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My ThreeJs Project</title>
+
+    <!-- Import the css file -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!-- You can change 0.160.0 to any other availble Three.js version to match your requirements -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- This canvas is the one y<ou will use to display your Three.js code. -->
+    <canvas id="canvas"></canvas>
+
+    <!-- Message box shown after camera finishes moving to a group -->
+    <div id="group-message" class="hidden" aria-live="polite" role="status"></div>
+
+    <!-- Custom messages for groups (editable) - kept hidden, used by script.js -->
+    <div id="group-message-data" style="display:none">
+        <div data-group="house_group">
+            <div class="msg-left">
+                 <strong>
+                    <CENTER>
+                        Pret à loger <BR>
+                    </CENTER>
+                </strong>
+                <text>  
+                    An emergency shelter made to be  : <BR>
+                    - Easy to assemble within less than a day<BR>
+                    - Durable for at least a year <BR>
+                    - Comfortable in most environments<BR>
+                    - Adaptable to the resources available<BR>
+                    - Cheap to make<BR>
+                    - Bio Sourced<BR>
+                </text>
+                 <strong>
+                    <CENTER>
+                        Results <BR>
+                    </CENTER>
+                </strong>
+                <text>  
+                    We managed to build a 4m² shelter that can be assembled by 4 people in less than 10mn  using only hand tools.  <BR>
+                    Each Unit cost less than 1000€ and is made with widely available bio sourced materials. <BR>
+                </text>
+            </div>
+            <div class="msg-right">
+                <strong>
+                    <CENTER>
+                        Results (images) <BR>
+                    </CENTER>
+                </strong>
+
+                <img src="front.jpg" alt="front img" style="height:15em;">
+                <img src="up.jpg" alt="front img" style="height:15em;">
+            </div>
+        </div>
+        <div data-group="moule_group">
+           
+            <div class="msg-left">
+                <strong>
+                    <CENTER>
+                         Mycobrik <BR>
+                    </CENTER>
+                </strong>
+                <text>
+                    a mycelium brick made to be a lighter and  a eco-frendly alternative to traditional bricks for indoor use and dry climates. 
+                </text>
+                <img src="modelMycobrick.jpg" alt="Mycobrik Mod" style="height:20em;">
+            </div>
+            <div class="msg-right"> 
+                It can be growns in just two days in a 3D printed mold using a hemp based substract. <BR>The result is a heat insulating and fire resistant brick that will decompose in less than a month in humid conditions.
+                <img src="mycobricks img.jpg" alt="Mycobrik img" style="height:20em;">
+            </div>
+             
+        </div>
+        <!--
+        <div data-group="ordi_group">
+            <div class="msg-left">Ordinateur : boîtier et composants visibles.</div>
+            <div class="msg-right">Interagissez pour voir l'intérieur ou revenir avec Echap.</div>
+        </div>
+            -->
+        <div data-group="golem_group">
+            <div class="msg-left">
+                <strong>
+                    <CENTER>
+                        WORK IN PROGGRESS : Shining <BR>
+                    </CENTER>
+                </strong>
+                <text>
+                    Shining is An all-in-one, DIY, accessible and secure system for electrodeposition on small to medium-sized parts.
+                </text>
+                 <strong>
+                    <CENTER>
+                     <BR>    what is electrodeposition ? <BR>
+                    </CENTER>
+                </strong>
+                <text>
+                    Electroplating or electroforming consists of using electricity to depose a thin layer of metal (copper, nickel, palladium, gold…) on a conductive piece. It is used in industry, jewellery and electronics to give metallic and non metallic pieces the characteristic of a metal without sacrificing cost or strength
+                </text>
+                 <strong>
+                    <CENTER>
+                     <BR>    What am I proposing ?  <BR>
+                    </CENTER>
+                </strong>
+                <text>
+                    I want to design and manufacture a all in one diy electroplating machine that answers those constraint :  
+                    <BR>
+                    - can be used without an external generator <BR>
+                    - consistent result even with minimum knowledge of the practice <BR>
+                    - the least amount of contact between the acid and the user <BR>
+                    - fully made with only generic parts and a 3D printer<BR>
+                    - easily scalable for bigger parts<BR>
+
+                </text>
+            </div>
+            <div class="msg-right">
+                <strong>
+                    <CENTER>
+                        Current prototype<BR> 
+                    </CENTER>
+                </strong>
+                 <img src="proto.jpg" alt="proto" style="height:15em;">
+           
+             <strong>
+                    <CENTER>
+                        Current results<BR> 
+                    </CENTER>
+                </strong>
+                 <video src = "result bef.mp4" alt="result" style="height:15em;" controls autoplay muted></video>
+                 
+                 <video src = "result aft.mp4" alt="result" style="height:15em;" controls autoplay muted ></video>
+            </div>
+        </div>
+    </div>
+
+    <!-- The import should happen after creating the other HTML elements since you will be importing them -->
+    <script type="module" src="./script.js"></script>
+</body>
+</html>

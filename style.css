@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;  /* Prevents scrollbars */
+}
+
+canvas {
+    position: fixed;  /* Makes canvas fill the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Group message box shown as two columns left/right of the centered object */
+#group-message {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    pointer-events: none; /* outer container should not block interaction */
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 220ms ease;
+    font-family: sans-serif;
+}
+
+#group-message.visible {
+    opacity: 1;
+}
+
+#group-message.hidden {
+    opacity: 0;
+}
+
+/* inner wrapper holds the two columns and allows pointer events for the boxes */
+#group-message .msg-inner {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* keep by default disabled, individual columns enable pointer-events */
+    position: relative;
+}
+
+#group-message .msg-col {
+    pointer-events: auto; /* text boxes can accept pointer events if needed */
+    background-color: rgba(0, 0, 0, 0.364);
+    color:  white;    
+    padding: 14px 16px;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    font-size: 20px;
+    line-height: 1.35;
+    max-width: 30%;
+    min-width: 180px;
+    text-align: left;
+    position: absolute;
+}
+
+/* Ensure images inside the message columns are centered and responsive */
+#group-message .msg-col img {
+    display: block;
+    margin: 8px auto;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Position columns equidistant from center */
+#group-message .msg-col.msg-left { 
+    right: calc(50% + 250px);  /* 20px from center */
+    transform: translateX(-20px); /* shift left by gap amount */
+}
+#group-message .msg-col.msg-right { 
+    left: calc(50% + 250px);   /* 20px from center */
+    transform: translateX(20px);  /* shift right by gap amount */
+}
+#group-message .msg-col video {
+display: inline-flex; justify-content: center; gap: 50px; vertical-align: middle;
+
+}
+/* Responsive: stack columns on narrow screens and position near bottom */
+
+
