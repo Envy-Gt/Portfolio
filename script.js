@@ -141,6 +141,10 @@ function showHoverLabel(group) {
     {
         name = "SHINING";
     }
+    if (name == "ORDI")
+    {
+        name = "CV";
+    }
 
     groupLabel.textContent = name;
     groupLabel.style.left = lastMouseX + "px";
