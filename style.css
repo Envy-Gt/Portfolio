@@ -86,6 +86,27 @@ canvas {
 display: inline-flex; justify-content: center; gap: 50px; vertical-align: middle;
 
 }
+#group-label {
+    position: fixed;
+    padding: 6px 10px;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    pointer-events: none;
+    transform: translate(-50%, -120%);
+    z-index: 99999;
+    opacity: 0;
+    transition: opacity .15s;
+}
+
+#group-label.visible {
+    opacity: 1;
+}
+
+#group-label.hidden {
+    opacity: 0;
+}
 /* Responsive: stack columns on narrow screens and position near bottom */
 
 

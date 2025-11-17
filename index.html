@@ -18,9 +18,12 @@
         }
     </script>
 </head>
+
+
 <body>
-    <!-- This canvas is the one y<ou will use to display your Three.js code. -->
+    <!-- This canvas is the one you will use to display your Three.js code. -->
     <canvas id="canvas"></canvas>
+    <div id="group-label" class="hidden"></div>
 
     <!-- Message box shown after camera finishes moving to a group -->
     <div id="group-message" class="hidden" aria-live="polite" role="status"></div>
@@ -145,5 +148,6 @@
 
     <!-- The import should happen after creating the other HTML elements since you will be importing them -->
     <script type="module" src="./script.js"></script>
+    <div id="group-label" class="hidden"></div>
 </body>
 </html>

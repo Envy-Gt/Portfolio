@@ -24,6 +24,8 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 // -------- Interaction / Raycasting helpers --------
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
+let lastMouseX = 0;
+let lastMouseY = 0;
 let INTERSECTED_GROUP = null; // currently hovered group
 const interactiveGroups = []; // store created groups for quick reference
 
@@ -110,6 +112,7 @@ function findInteractiveGroup(obj) {
     return null;
 }
 
+
 function setGroupHover(group, hover) {
     if (!group) return;
     group.traverse((c) => {
@@ -122,12 +125,38 @@ function setGroupHover(group, hover) {
                     m.emissiveIntensity = 1;
                 }
                 c.material = m;
+                
             } else {
                 if (c.userData.originalMaterial) c.material = c.userData.originalMaterial;
             }
         }
     });
 }
+
+function showHoverLabel(group) {
+    if (!group) return;
+
+     let name = group.name.replace("_group", "").toUpperCase();
+    if (name == "GOLEM")
+    {
+        name = "SHINING";
+    }
+
+    groupLabel.textContent = name;
+    groupLabel.style.left = lastMouseX + "px";
+    groupLabel.style.top = (lastMouseY - 20) + "px";
+
+    groupLabel.classList.remove("hidden");
+    groupLabel.classList.add("visible");
+}
+
+function hideHoverLabel() {
+    groupLabel.classList.remove("visible");
+    groupLabel.classList.add("hidden");
+}
+
+
+
 /*
 // sphere pour le placement des caméras
 const sphere = new THREE.SphereGeometry(0.05, 32, 32);
@@ -316,9 +345,18 @@ window.addEventListener('resize', resizeRenderer);
 
 // Mouse events for interaction
 window.addEventListener('mousemove', (event) => {
+    lastMouseX = event.clientX;
+    lastMouseY = event.clientY;
+
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    if (INTERSECTED_GROUP) {
+        showHoverLabel(INTERSECTED_GROUP);
+    }
 });
+
+
 
 // Helper function to smoothly move camera
 function moveCamera(targetPosition, lookAtTarget, onComplete) {
@@ -364,6 +402,7 @@ function animateGroupMovement(group, targetPositionsMap, duration = 600, onCompl
             const target = targetPositionsMap[child.name];
             if (target) {
                 starts.push({ mesh: child, startPos, target: new THREE.Vector3(target.x, target.y, target.z) });
+                
             }
         }
     });
@@ -566,20 +605,27 @@ function animate() {
         raycaster.setFromCamera(mouse, camera);
         const intersects = raycaster.intersectObjects(interactiveGroups, true);
         if (intersects.length > 0) {
-            const mesh = intersects[0].object;
-            const grp = findInteractiveGroup(mesh);
-            if (grp !== INTERSECTED_GROUP) {
-                // restore previous
-                if (INTERSECTED_GROUP) setGroupHover(INTERSECTED_GROUP, false);
-                INTERSECTED_GROUP = grp;
-                if (INTERSECTED_GROUP) setGroupHover(INTERSECTED_GROUP, true);
-            }
-        } else {
-            if (INTERSECTED_GROUP) {
-                setGroupHover(INTERSECTED_GROUP, false);
-                INTERSECTED_GROUP = null;
-            }
+    const mesh = intersects[0].object;
+    const grp = findInteractiveGroup(mesh);
+
+    if (grp !== INTERSECTED_GROUP) {
+        if (INTERSECTED_GROUP) setGroupHover(INTERSECTED_GROUP, false);
+
+        INTERSECTED_GROUP = grp;
+
+        if (INTERSECTED_GROUP) {
+            setGroupHover(INTERSECTED_GROUP, true);
+            showHoverLabel(INTERSECTED_GROUP);
         }
+    }
+} else {
+    if (INTERSECTED_GROUP) {
+        setGroupHover(INTERSECTED_GROUP, false);
+        INTERSECTED_GROUP = null;
+        hideHoverLabel();
+    }
+}
+
     }
 
     // label behavior removed
