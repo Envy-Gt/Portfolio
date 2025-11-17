@@ -59,7 +59,7 @@ canvas {
     box-shadow: 0 6px 20px rgba(0,0,0,0.35);
     font-size: 20px;
     line-height: 1.35;
-    max-width: 30%;
+    max-width: 30%; 
     min-width: 180px;
     text-align: left;
     position: absolute;
@@ -92,6 +92,7 @@ display: inline-flex; justify-content: center; gap: 50px; vertical-align: middle
     background: rgba(0,0,0,0.75);
     color: white;
     font-size: 16px;
+    font-family: Arial, sans-serif;
     border-radius: 6px;
     pointer-events: none;
     transform: translate(-50%, -120%);
