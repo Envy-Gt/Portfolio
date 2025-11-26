@@ -145,6 +145,10 @@ function showHoverLabel(group) {
     {
         name = "CV";
     }
+    if (name == "MOULE")
+    {
+        name = "MYCOBRICK";
+    }
 
     groupLabel.textContent = name;
     groupLabel.style.left = lastMouseX + "px";
