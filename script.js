@@ -41,6 +41,8 @@ const groupCameraPositions = {
 const groupLabel = document.getElementById('group-label');
 // message element shown after camera movement
 const groupMessage = document.getElementById('group-message');
+// escape hint element shown when a group is active
+const escapeHint = document.getElementById('escape-hint');
 
 // Messages are now stored in HTML (see #group-message-data). Helper to read them:
 function getGroupMessage(groupName) {
@@ -96,6 +98,18 @@ function hideGroupMessage() {
     // clear content after transition for cleanliness
     setTimeout(() => { if (groupMessage) groupMessage.innerHTML = ''; }, 260);
     if (_messageTimer) { clearTimeout(_messageTimer); _messageTimer = null; }
+}
+
+function showEscapeHint() {
+    if (!escapeHint) return;
+    escapeHint.classList.remove('hidden');
+    escapeHint.classList.add('visible');
+}
+
+function hideEscapeHint() {
+    if (!escapeHint) return;
+    escapeHint.classList.remove('visible');
+    escapeHint.classList.add('hidden');
 }
 
 // Camera animation state
@@ -555,6 +569,8 @@ window.addEventListener('click', (event) => {
             // After camera movement completes, read message from the DOM and show it
             const msg = getGroupMessage(grp.name);
             if (msg) showGroupMessage(msg);
+            // Show the escape hint
+            showEscapeHint();
         });
         console.log('Moving camera to view:', grp.name);
     }
@@ -594,6 +610,9 @@ window.addEventListener('keydown', (event) => {
 
     // Hide any visible group message
     hideGroupMessage();
+
+    // Hide the escape hint
+    hideEscapeHint();
 
     // Clear hover highlight if any
     if (INTERSECTED_GROUP) {
